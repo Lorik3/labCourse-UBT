@@ -1,0 +1,70 @@
+/*0
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Models;
+
+import BLL.Lloji;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
+
+/**
+ *
+ * @author lorik
+ */
+
+
+public class LlojiTableModel extends AbstractTableModel {
+    
+    List<Lloji> list;
+    String [] cols = {"ID", "Emri",}; // vargu i stringjeve (cols)
+    
+    public LlojiTableModel(){} // konstruktor i zbrazet
+    
+    public LlojiTableModel(List<Lloji> list){ //konstruktor qe pranon list personave
+       this.list = list; // qe dergon lista
+    }
+    public void addList(List<Lloji>list){ // per mos me thirr gjith konstruktorin
+        this.list = list;
+    }
+    
+    @Override
+    public String getColumnName(int col){ // nese dojna me mar emrin e kolones ne bas te numrit te kolonave
+        return cols[col];
+        
+    }
+    
+    @Override
+    public int getRowCount() { // na kthen numrin e rreshtave
+        
+         return list.size();
+    }
+    public void remove(int row){
+        list.remove(row); // per me fshi ni rresht ne bas te numrit te rreshtit
+    }
+    
+    public Lloji getLloji(int index){   //mw kthy ni person ne baz te numrit qe marum
+   
+    return list.get(index);
+    }
+    
+    @Override
+    public int getColumnCount() {
+        return cols.length; //per me kthy nje integer
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+                  // kthen nje objekt ne baz te dy parametrave
+        Lloji l = list.get(rowIndex);
+        switch(columnIndex){
+            case 0:
+                return l.getLlojiId();
+            case 1:
+                return l.getEmri();
+            default:
+                return null;
+        }
+    }
+}
